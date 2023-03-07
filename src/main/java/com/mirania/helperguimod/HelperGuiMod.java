@@ -22,7 +22,7 @@ public class HelperGuiMod
 
     private final int leftX = 8, topY = 8;
 
-    private GuiData guiData;
+    private final GuiData guiData;
 
     public HelperGuiMod()
     {
@@ -33,7 +33,7 @@ public class HelperGuiMod
     }
 
     @SubscribeEvent
-    public void onRenderGuiOverlay(RenderGuiOverlayEvent.Pre event) {
+    public void onRenderGuiOverlay(final RenderGuiOverlayEvent.Pre event) {
         if (Minecraft.getInstance().options.renderDebug) {
             // this mod is redundant while debug menu is open
             return;
@@ -48,6 +48,10 @@ public class HelperGuiMod
 
     private void drawText(final RenderGuiOverlayEvent.Pre event, @Nullable final Component component,
                           final int row, final boolean isLastRow) {
+
+        if (component == null) {
+            return;
+        }
 
         final Font font = Minecraft.getInstance().font;
         final int rowStartY = this.topY + row * (font.lineHeight + 2);
