@@ -20,7 +20,7 @@ public class HelperGuiMod
 
     private final int backgroundColor = 0x06606060;
 
-    private final int leftX = 8, topY = 8;
+    private final int rightX = 8, topY = 8;
 
     private final GuiData guiData;
 
@@ -54,11 +54,12 @@ public class HelperGuiMod
         }
 
         final Font font = Minecraft.getInstance().font;
+        final int screenWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
         final int rowStartY = this.topY + row * (font.lineHeight + 2);
         final int rowEndY = rowStartY + font.lineHeight + (isLastRow ? 1 : 0);
 
-        GuiComponent.fill(event.getPoseStack(), this.leftX - 2, rowStartY - 2, font.width(component) + 10, rowEndY, this.backgroundColor);
-        font.drawShadow(event.getPoseStack(), component, this.leftX, rowStartY, this.textColor);
+        GuiComponent.fill(event.getPoseStack(), screenWidth - font.width(component) - 10, rowStartY - 2, screenWidth - this.rightX + 2, rowEndY, this.backgroundColor);
+        font.drawShadow(event.getPoseStack(), component, screenWidth - font.width(component) - 8, rowStartY, this.textColor);
     }
 
 }
